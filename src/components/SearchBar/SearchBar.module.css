@@ -1,0 +1,14 @@
+.header_style {
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  background-color: aqua;
+  align-items: center;
+}
+.container {
+  font-size: 20px;
+  margin-right: 10px;
+  background-color: aliceblue;
+  border-radius: 4px;
+  border-color: rgb(212, 196, 255);
+}

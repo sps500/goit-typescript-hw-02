@@ -1,0 +1,21 @@
+.image_gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  align-items: baseline;
+}
+
+.image_gallery li {
+  list-style: none;
+}
+
+.image_gallery img {
+  width: 100%;
+  /* height: 200px; */
+  object-fit: contain; /* Забезпечує збереження пропорцій зображення */
+  display: flex;
+  margin-left: 0;
+  margin-right: 0;
+
+  padding: 0;
+}
