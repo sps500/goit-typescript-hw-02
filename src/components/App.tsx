@@ -1,23 +1,24 @@
-import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import SearchBar from "./SearchBar/SearchBar";
-import ImageGallery from "./ImageGallery/ImageGallery";
-import Loader from "./Loader/Loader";
-import ErrorMessage from "./ErrorMessage/ErrorMessage";
-import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
-import ImageModal from "./ImageModal/ImageModal";
-import { Toaster, toast } from "react-hot-toast";
+import { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import SearchBar from './SearchBar/SearchBar';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Loader from './Loader/Loader';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
+import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
+import ImageModal from './ImageModal/ImageModal';
+import { Toaster, toast } from 'react-hot-toast';
+import { Image } from '../types'; 
 
-const API_KEY = "XAi4gjsoD4e_yrJmu5T1_gJ96WGdAqdCTR6Ca5RhNjU";
-const BASE_URL = "https://api.unsplash.com/search/photos";
+const API_KEY = 'XAi4gjsoD4e_yrJmu5T1_gJ96WGdAqdCTR6Ca5RhNjU';
+const BASE_URL = 'https://api.unsplash.com/search/photos';
 
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+const App: React.FC = () => {
+  const [images, setImages] = useState<Image[]>([]);
+  const [query, setQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   const fetchImages = useCallback(async () => {
     setLoading(true);
@@ -25,11 +26,10 @@ const App = () => {
       const response = await axios.get(BASE_URL, {
         params: { query, page, client_id: API_KEY },
       });
-      console.log(response.data.results);
       setImages((prevImages) => [...prevImages, ...response.data.results]);
       setError(null);
     } catch (err) {
-      setError("Failed to fetch images");
+      setError('Failed to fetch images');
     } finally {
       setLoading(false);
     }
@@ -41,9 +41,9 @@ const App = () => {
     }
   }, [query, page, fetchImages]);
 
-  const handleSearch = (newQuery) => {
-    if (newQuery.trim() === "") {
-      toast.error("Please enter a search term");
+  const handleSearch = (newQuery: string) => {
+    if (newQuery.trim() === '') {
+      toast.error('Please enter a search term');
       return;
     }
     setQuery(newQuery);
@@ -55,7 +55,7 @@ const App = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const handleImageClick = (image) => {
+  const handleImageClick = (image: Image) => {
     setSelectedImage(image);
   };
 
@@ -83,3 +83,6 @@ const App = () => {
 };
 
 export default App;
+
+
+
